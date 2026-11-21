@@ -1,0 +1,396 @@
+{
+  "model": "tfidf_logreg",
+  "git_commit": "no-commit-yet",
+  "seed": 42,
+  "vectorizer": {
+    "ngram_range": [
+      1,
+      2
+    ],
+    "min_df": 3,
+    "max_df": 0.9,
+    "max_features": 200000,
+    "sublinear_tf": true
+  },
+  "classifier": {
+    "solver": "liblinear",
+    "C": 4.0,
+    "class_weight": "balanced",
+    "max_iter": 2000,
+    "random_state": 42,
+    "wrapper": "OneVsRest"
+  },
+  "threshold": 0.6,
+  "threshold_rule": "global, max val micro-F1 over 0.20-0.80 step 0.05",
+  "val_threshold_sweep": {
+    "0.2": 0.7619047619047619,
+    "0.25": 0.7964310871096502,
+    "0.3": 0.8204251160517958,
+    "0.35": 0.8358509566968781,
+    "0.4": 0.8541017653167186,
+    "0.45": 0.8671812616449295,
+    "0.5": 0.8720327421555253,
+    "0.55": 0.8782535684298909,
+    "0.6": 0.882454128440367,
+    "0.65": 0.8807017543859649,
+    "0.7": 0.874625074985003,
+    "0.75": 0.8629504157684016,
+    "0.8": 0.8462757527733756
+  },
+  "n": {
+    "train": 5689,
+    "val": 1219,
+    "test": 1220
+  },
+  "labels": [
+    "1.01",
+    "1.02",
+    "2.01",
+    "2.02",
+    "2.03",
+    "3.01",
+    "3.02",
+    "3.03",
+    "4.01",
+    "5.02",
+    "5.03",
+    "5.07",
+    "7.01",
+    "8.01",
+    "other"
+  ],
+  "val": {
+    "micro_f1": 0.882454128440367,
+    "macro_f1": 0.7909210305025786,
+    "subset_accuracy": 0.748974569319114
+  },
+  "test": {
+    "micro_f1": 0.8811300639658849,
+    "macro_f1": 0.8305610396975094,
+    "subset_accuracy": 0.730327868852459
+  },
+  "test_per_class": {
+    "1.01": {
+      "precision": 0.8616071428571429,
+      "recall": 0.9698492462311558,
+      "f1": 0.9125295508274232,
+      "support": 199
+    },
+    "1.02": {
+      "precision": 0.5833333333333334,
+      "recall": 0.25925925925925924,
+      "f1": 0.358974358974359,
+      "support": 27
+    },
+    "2.01": {
+      "precision": 0.6829268292682927,
+      "recall": 0.8,
+      "f1": 0.7368421052631579,
+      "support": 35
+    },
+    "2.02": {
+      "precision": 0.961038961038961,
+      "recall": 0.9511568123393316,
+      "f1": 0.9560723514211886,
+      "support": 389
+    },
+    "2.03": {
+      "precision": 0.7634408602150538,
+      "recall": 0.922077922077922,
+      "f1": 0.8352941176470589,
+      "support": 77
+    },
+    "3.01": {
+      "precision": 0.75,
+      "recall": 0.9130434782608695,
+      "f1": 0.8235294117647058,
+      "support": 23
+    },
+    "3.02": {
+      "precision": 0.7674418604651163,
+      "recall": 0.9166666666666666,
+      "f1": 0.8354430379746836,
+      "support": 72
+    },
+    "3.03": {
+      "precision": 0.78125,
+      "recall": 0.8620689655172413,
+      "f1": 0.819672131147541,
+      "support": 29
+    },
+    "4.01": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 17
+    },
+    "5.02": {
+      "precision": 0.9611650485436893,
+      "recall": 0.9,
+      "f1": 0.9295774647887324,
+      "support": 220
+    },
+    "5.03": {
+      "precision": 0.9433962264150944,
+      "recall": 0.9090909090909091,
+      "f1": 0.9259259259259259,
+      "support": 55
+    },
+    "5.07": {
+      "precision": 1.0,
+      "recall": 0.9693877551020408,
+      "f1": 0.9844559585492227,
+      "support": 98
+    },
+    "7.01": {
+      "precision": 0.8987730061349694,
+      "recall": 0.8592375366568915,
+      "f1": 0.8785607196401799,
+      "support": 341
+    },
+    "8.01": {
+      "precision": 0.8045977011494253,
+      "recall": 0.7368421052631579,
+      "f1": 0.7692307692307693,
+      "support": 285
+    },
+    "other": {
+      "precision": 0.9,
+      "recall": 0.5625,
+      "f1": 0.6923076923076923,
+      "support": 16
+    }
+  },
+  "fit_seconds": 5.2,
+  "predict_ms_per_doc": 0.007,
+  "top_terms": {
+    "1.01": [
+      "agreement",
+      "10",
+      "entered",
+      "entered into",
+      "amendment",
+      "description 10",
+      "agreement dated",
+      "agreement the",
+      "agreements",
+      "company entered",
+      "into",
+      "between"
+    ],
+    "1.02": [
+      "termination",
+      "terminated",
+      "agreement",
+      "the termination",
+      "to terminate",
+      "termination of",
+      "terminate",
+      "terminate the",
+      "agreement dated",
+      "agreement was",
+      "td",
+      "termination agreement"
+    ],
+    "2.01": [
+      "purchase",
+      "april 19",
+      "forma",
+      "pro forma",
+      "purchase agreement",
+      "acquisition",
+      "the acquisition",
+      "purchase price",
+      "19 2023",
+      "closing",
+      "the closing",
+      "pro"
+    ],
+    "2.02": [
+      "quarter",
+      "results for",
+      "results",
+      "financial results",
+      "ended",
+      "quarter ended",
+      "release",
+      "press release",
+      "press",
+      "earnings",
+      "for the",
+      "its financial"
+    ],
+    "2.03": [
+      "item the",
+      "credit",
+      "information set",
+      "principal amount",
+      "into this",
+      "form is",
+      "is incorporated",
+      "amount of",
+      "interest",
+      "note",
+      "in item",
+      "default"
+    ],
+    "3.01": [
+      "listing",
+      "compliance",
+      "compliance with",
+      "delisting",
+      "regain",
+      "regain compliance",
+      "the nyse",
+      "to regain",
+      "requirement",
+      "continued listing",
+      "the listing",
+      "company received"
+    ],
+    "3.02": [
+      "from registration",
+      "exemption",
+      "section of",
+      "in reliance",
+      "shares of",
+      "issuance",
+      "shares",
+      "registration",
+      "exemption from",
+      "the exemption",
+      "issuance of",
+      "reliance"
+    ],
+    "3.03": [
+      "certificate of",
+      "certificate",
+      "the certificate",
+      "split",
+      "rights",
+      "designation",
+      "preferred",
+      "information set",
+      "rights agreement",
+      "the reverse",
+      "shareholder rights",
+      "amendment"
+    ],
+    "4.01": [
+      "item 304",
+      "304",
+      "accounting principles",
+      "principles",
+      "audit",
+      "financial statements",
+      "of accounting",
+      "auditing",
+      "opinion",
+      "scope or",
+      "disagreements",
+      "304 of"
+    ],
+    "5.02": [
+      "mr",
+      "his",
+      "the board",
+      "effective",
+      "board",
+      "ms",
+      "plan",
+      "incentive",
+      "employment",
+      "officer of",
+      "he",
+      "compensation"
+    ],
+    "5.03": [
+      "bylaws",
+      "certificate of",
+      "certificate",
+      "restated",
+      "and restated",
+      "amended and",
+      "restated bylaws",
+      "of amendment",
+      "amendment",
+      "articles",
+      "articles of",
+      "the certificate"
+    ],
+    "5.07": [
+      "votes",
+      "meeting",
+      "against",
+      "vote",
+      "proposal",
+      "broker",
+      "broker non",
+      "non votes",
+      "annual meeting",
+      "for against",
+      "abstain",
+      "meeting of"
+    ],
+    "7.01": [
+      "presentation",
+      "investor",
+      "website",
+      "99",
+      "announcing the",
+      "furnished",
+      "exhibit 99",
+      "regulation fd",
+      "fd",
+      "com",
+      "act or",
+      "is furnished"
+    ],
+    "8.01": [
+      "dividend",
+      "repurchase",
+      "press",
+      "press release",
+      "announcing the",
+      "of its",
+      "million",
+      "release",
+      "is attached",
+      "record",
+      "99",
+      "of record"
+    ],
+    "other": [
+      "charges",
+      "restructuring",
+      "company expects",
+      "expects",
+      "expects to",
+      "incur",
+      "costs",
+      "the blackout",
+      "bylaws",
+      "blackout",
+      "approximately",
+      "the restructuring"
+    ]
+  },
+  "dataset": {
+    "split_rule": "time-based 70/15/15 by filing_date",
+    "rare_codes": [
+      "1.03",
+      "1.04",
+      "2.04",
+      "2.05",
+      "2.06",
+      "4.02",
+      "5.01",
+      "5.04",
+      "5.05",
+      "5.06",
+      "5.08"
+    ],
+    "rare_handling": "other",
+    "min_count": 50
+  }
+}
