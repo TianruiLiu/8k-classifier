@@ -7,14 +7,42 @@ Every model follows the same protocol: fit on train only, choose one global deci
 
 ## Summary
 
-| Model | Micro-F1 | Macro-F1 | Subset acc | Notes |
-|---|---|---|---|---|
-| TF-IDF + LR (1–2-grams) | 0.881 | 0.831 | 0.730 | threshold 0.60 from val; 5,689 train / 1,220 test; fits in ~5 s on a laptop CPU |
-| LLM zero-shot | — | — | — | M2 |
-| LLM few-shot | — | — | — | M2 |
-| LoRA fine-tune | — | — | — | M3 |
+| Model | Micro-F1 [95% CI] | Macro-F1 [95% CI] | Subset acc | $ per 1K filings | Notes |
+|---|---|---|---|---|---|
+| GPT-6.2 Sol, zero-shot | **0.949** [0.940, 0.959] | **0.951** [0.936, 0.964] | **0.919** | 4.58 | reasoning effort `low` (lowest it accepts) |
+| Claude Sonnet 5.5, zero-shot | 0.898 [0.885, 0.910] | 0.892 [0.869, 0.908] | 0.813 | 4.73 | thinking off |
+| TF-IDF + LR (1–2-grams) | 0.881 [0.870, 0.893] | 0.831 [0.801, 0.854] | 0.730 | ~0 | threshold 0.60 from val; 5,689 train / 1,220 test; fits in ~5 s on a laptop CPU |
+| GPT-6 Luna, zero-shot | 0.788 [0.772, 0.802] | 0.781 [0.751, 0.804] | 0.541 | 0.23 | reasoning effort `none` |
+| Claude Haiku 5.5, zero-shot | 0.781 [0.767, 0.795] | 0.748 [0.725, 0.768] | 0.478 | 0.24 | thinking off |
+| LLM few-shot | — | — | — | — | M2 |
+| Fine-tuned small model | — | — | — | — | M3 |
 
-Subset accuracy = share of filings where every label is right. Validation scores for the baseline: micro-F1 0.882, macro-F1 0.791, subset accuracy 0.749.
+Subset accuracy = share of filings where every label is right. 95% CIs are bootstrap intervals over test filings (1,000 resamples); every difference from TF-IDF above is significant (paired bootstrap, CI excludes 0). Costs are at list prices on Nov 24, 2026, from logged tokens. All LLMs use the same frozen prompt and a JSON schema limited to the 15 labels; per-class tables for every model are in `results/compare_test.md`. Validation scores for the baseline: micro-F1 0.882, macro-F1 0.791, subset accuracy 0.749.
+
+## Training-data contamination check
+
+A model that saw these filings during training could recall their Item codes from EDGAR, inflating its score. The test set covers filings dated Jun 2 – Nov 20, 2026, so each model's published knowledge cutoff was checked against that window:
+
+| Model | Knowledge cutoff (published) | Overlaps the test window? |
+|---|---|---|
+| GPT-6 Luna | May 18, 2026 | No |
+| GPT-6.2 Sol | Jun 1, 2026 | No (test starts Jun 2) |
+| Claude Sonnet 5.5 | Jun 2026 (month only) | Possibly June |
+| Claude Haiku 5.5 | Jun 2026 (month only) | Possibly June |
+
+Every model was then rescored on the 1,042 test filings dated Jul 1, 2026 or later, after all four cutoffs (178 test filings are from June):
+
+| Model | All test (micro / macro) | Jul 1 onward only (micro / macro) |
+|---|---|---|
+| GPT-6.2 Sol | 0.949 / 0.951 | 0.948 / 0.952 |
+| Claude Sonnet 5.5 | 0.898 / 0.892 | 0.898 / 0.894 |
+| TF-IDF + LR | 0.881 / 0.831 | 0.878 / 0.826 |
+| GPT-6 Luna | 0.788 / 0.781 | 0.789 / 0.784 |
+| Claude Haiku 5.5 | 0.781 / 0.748 | 0.783 / 0.754 |
+
+Scores on filings no model could have seen match the full test set to within 0.006, and the ranking is unchanged, so memorized filings do not explain the results. The time-based split is what makes this check possible: with a random split, test filings would be spread across years that every model's training data covers.
+
+Cutoff sources (checked Nov 24, 2026): [Claude models overview](https://platform.claude.com/docs/en/about-claude/models/overview.md), [GPT-6.2 Sol](https://developers.openai.com/api/docs/models/gpt-6.2-sol), [GPT-6 Luna](https://developers.openai.com/api/docs/models/gpt-6-luna).
 
 ## Per-class F1 (test)
 
