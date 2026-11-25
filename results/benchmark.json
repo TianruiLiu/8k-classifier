@@ -1,0 +1,240 @@
+{
+  "env": {
+    "date": "2026-11-25",
+    "machine": "Apple M5, 10 cores, Darwin 25.6.0"
+  },
+  "rows": [
+    {
+      "model": "tfidf",
+      "kind": "local",
+      "device": "cpu",
+      "n": 1220,
+      "p50_ms": 0.9,
+      "p95_ms": 1.6,
+      "p99_ms": 2.3,
+      "mean_ms": 1.0,
+      "train_seconds": 4.4,
+      "cost_per_1k_usd": 0.0
+    },
+    {
+      "model": "modernbert_1024",
+      "kind": "local",
+      "device": "mps",
+      "n": 1220,
+      "p50_ms": 55.8,
+      "p95_ms": 123.6,
+      "p99_ms": 125.4,
+      "mean_ms": 68.4,
+      "train_seconds": 10926,
+      "batched_ms_per_filing_mps": 75.98,
+      "cost_per_1k_usd": 0.0,
+      "torch_threads": null
+    },
+    {
+      "model": "modernbert_1024",
+      "kind": "local",
+      "device": "cpu",
+      "n": 200,
+      "p50_ms": 140.5,
+      "p95_ms": 291.5,
+      "p99_ms": 296.0,
+      "mean_ms": 168.8,
+      "train_seconds": 10926,
+      "batched_ms_per_filing_mps": 75.98,
+      "cost_per_1k_usd": 0.0,
+      "torch_threads": 4
+    },
+    {
+      "model": "gpt6luna_zeroshot",
+      "kind": "llm",
+      "model_id": "gpt-6-luna",
+      "n": 1220,
+      "p50_ms": 779.0,
+      "p95_ms": 1208.0,
+      "p99_ms": 1648.0,
+      "mean_ms": 829.3,
+      "tokens_per_filing": {
+        "input": 2206.7,
+        "output": 17.3,
+        "cache_read": 0.0,
+        "cache_write": 0.0
+      },
+      "cost_per_1k_usd": 0.23,
+      "cost_per_1k_no_cache_usd": 0.23,
+      "prices_per_1m": {
+        "input": 0.1,
+        "output": 0.5,
+        "cache_read": 0.01,
+        "as_of": "2026-11-24"
+      }
+    },
+    {
+      "model": "gpt6luna_fewshot",
+      "kind": "llm",
+      "model_id": "gpt-6-luna",
+      "n": 1220,
+      "p50_ms": 808.0,
+      "p95_ms": 1492.0,
+      "p99_ms": 2039.0,
+      "mean_ms": 887.9,
+      "tokens_per_filing": {
+        "input": 1374.2,
+        "output": 16.6,
+        "cache_read": 4340.5,
+        "cache_write": 0.0
+      },
+      "cost_per_1k_usd": 0.19,
+      "cost_per_1k_no_cache_usd": 0.58,
+      "prices_per_1m": {
+        "input": 0.1,
+        "output": 0.5,
+        "cache_read": 0.01,
+        "as_of": "2026-11-24"
+      }
+    },
+    {
+      "model": "haiku55_fewshot",
+      "kind": "llm",
+      "model_id": "claude-haiku-5-5",
+      "n": 1220,
+      "p50_ms": 827.0,
+      "p95_ms": 1436.0,
+      "p99_ms": 1814.0,
+      "mean_ms": 815.0,
+      "tokens_per_filing": {
+        "input": 2196.4,
+        "output": 17.5,
+        "cache_read": 7197.0,
+        "cache_write": 0.0
+      },
+      "cost_per_1k_usd": 0.3,
+      "cost_per_1k_no_cache_usd": 0.95,
+      "prices_per_1m": {
+        "input": 0.1,
+        "output": 0.5,
+        "cache_read": 0.01,
+        "as_of": "2026-11-24"
+      }
+    },
+    {
+      "model": "haiku55_zeroshot",
+      "kind": "llm",
+      "model_id": "claude-haiku-5-5",
+      "n": 1220,
+      "p50_ms": 900.0,
+      "p95_ms": 1536.0,
+      "p99_ms": 1921.0,
+      "mean_ms": 902.5,
+      "tokens_per_filing": {
+        "input": 2196.4,
+        "output": 17.0,
+        "cache_read": 1591.5,
+        "cache_write": 10.5
+      },
+      "cost_per_1k_usd": 0.25,
+      "cost_per_1k_no_cache_usd": 0.39,
+      "prices_per_1m": {
+        "input": 0.1,
+        "output": 0.5,
+        "cache_read": 0.01,
+        "as_of": "2026-11-24"
+      }
+    },
+    {
+      "model": "gpt62sol_zeroshot",
+      "kind": "llm",
+      "model_id": "gpt-6.2-sol",
+      "n": 1220,
+      "p50_ms": 1131.0,
+      "p95_ms": 1593.0,
+      "p99_ms": 2382.0,
+      "mean_ms": 1184.0,
+      "tokens_per_filing": {
+        "input": 2206.7,
+        "output": 16.1,
+        "cache_read": 0.0,
+        "cache_write": 0.0
+      },
+      "cost_per_1k_usd": 4.57,
+      "cost_per_1k_no_cache_usd": 4.57,
+      "prices_per_1m": {
+        "input": 2.0,
+        "output": 10.0,
+        "cache_read": 0.1,
+        "as_of": "2026-11-24"
+      }
+    },
+    {
+      "model": "sonnet55_fewshot",
+      "kind": "llm",
+      "model_id": "claude-sonnet-5-5",
+      "n": 1220,
+      "p50_ms": 1180.0,
+      "p95_ms": 1676.0,
+      "p99_ms": 2044.0,
+      "mean_ms": 1106.4,
+      "tokens_per_filing": {
+        "input": 2196.4,
+        "output": 15.4,
+        "cache_read": 7149.8,
+        "cache_write": 47.2
+      },
+      "cost_per_1k_usd": 5.38,
+      "cost_per_1k_no_cache_usd": 18.94,
+      "prices_per_1m": {
+        "input": 2.0,
+        "output": 10.0,
+        "cache_read": 0.1,
+        "as_of": "2026-11-24"
+      }
+    },
+    {
+      "model": "gpt62sol_fewshot",
+      "kind": "llm",
+      "model_id": "gpt-6.2-sol",
+      "n": 1220,
+      "p50_ms": 1211.0,
+      "p95_ms": 2416.0,
+      "p99_ms": 2968.0,
+      "mean_ms": 1351.1,
+      "tokens_per_filing": {
+        "input": 1334.7,
+        "output": 16.2,
+        "cache_read": 4380.0,
+        "cache_write": 0.0
+      },
+      "cost_per_1k_usd": 3.27,
+      "cost_per_1k_no_cache_usd": 11.59,
+      "prices_per_1m": {
+        "input": 2.0,
+        "output": 10.0,
+        "cache_read": 0.1,
+        "as_of": "2026-11-24"
+      }
+    },
+    {
+      "model": "sonnet55_zeroshot",
+      "kind": "llm",
+      "model_id": "claude-sonnet-5-5",
+      "n": 1220,
+      "p50_ms": 1267.0,
+      "p95_ms": 1937.0,
+      "p99_ms": 2429.0,
+      "mean_ms": 1141.3,
+      "tokens_per_filing": {
+        "input": 2196.4,
+        "output": 15.4,
+        "cache_read": 1591.5,
+        "cache_write": 10.5
+      },
+      "cost_per_1k_usd": 4.73,
+      "cost_per_1k_no_cache_usd": 7.75,
+      "prices_per_1m": {
+        "input": 2.0,
+        "output": 10.0,
+        "cache_read": 0.1,
+        "as_of": "2026-11-24"
+      }
+    }
+  ]
+}
