@@ -13,3 +13,6 @@ data/dataset.parquet
 
 # Raw LLM responses (re-creatable, and large once test runs finish)
 data/llm_cache/
+
+# Fine-tuned checkpoints (~600 MB each; rebuilt by src/finetune.py)
+models/
