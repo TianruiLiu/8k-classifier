@@ -1,0 +1,78 @@
+{
+  "model": "gpt62sol_fewshot",
+  "provider": "openai",
+  "model_id": "gpt-6.2-sol",
+  "mode": "fewshot",
+  "prompt_hash": "ffac7a90eedc",
+  "threshold": 0.5,
+  "settings": {
+    "reasoning_effort": "low",
+    "max_completion_tokens": 1024
+  },
+  "few_shot_examples": [
+    "0001193125-25-312904",
+    "0001140361-24-045855",
+    "0001477932-21-004665",
+    "0001437749-23-002043",
+    "0001362468-24-000065",
+    "0001213900-25-066121",
+    "0001493152-22-019958",
+    "0001213900-24-114023",
+    "0001437749-25-019418",
+    "0001486957-24-000006",
+    "0000936468-23-000017",
+    "0000950170-24-007783",
+    "0001193125-24-208109",
+    "0001788230-25-000124",
+    "0001193125-22-288988"
+  ],
+  "run_date": "2026-11-24",
+  "by_split": {
+    "test": {
+      "n": 1220,
+      "failures": 0,
+      "failure_examples": [],
+      "empty_label_lists": 0,
+      "tokens": {
+        "input": 1628295,
+        "output": 19819,
+        "cache_read": 5343600,
+        "cache_write": 0
+      },
+      "avg_output_tokens": 16.2,
+      "latency_p50_s": 1.211,
+      "latency_p95_s": 2.416,
+      "cost_usd": 3.9891,
+      "cost_per_1k_filings_usd": 3.27,
+      "prices_per_1m": {
+        "input": 2.0,
+        "output": 10.0,
+        "cache_read": 0.1,
+        "as_of": "2026-11-24"
+      }
+    },
+    "val": {
+      "n": 200,
+      "failures": 0,
+      "failure_examples": [],
+      "empty_label_lists": 0,
+      "tokens": {
+        "input": 241084,
+        "output": 3144,
+        "cache_read": 858480,
+        "cache_write": 0
+      },
+      "avg_output_tokens": 15.7,
+      "latency_p50_s": 1.107,
+      "latency_p95_s": 1.337,
+      "cost_usd": 0.5995,
+      "cost_per_1k_filings_usd": 2.997,
+      "prices_per_1m": {
+        "input": 2.0,
+        "output": 10.0,
+        "cache_read": 0.1,
+        "as_of": "2026-11-24"
+      }
+    }
+  }
+}

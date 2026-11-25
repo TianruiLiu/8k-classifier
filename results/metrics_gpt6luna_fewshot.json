@@ -1,0 +1,78 @@
+{
+  "model": "gpt6luna_fewshot",
+  "provider": "openai",
+  "model_id": "gpt-6-luna",
+  "mode": "fewshot",
+  "prompt_hash": "8b657eaa52db",
+  "threshold": 0.5,
+  "settings": {
+    "reasoning_effort": "none",
+    "max_completion_tokens": 1024
+  },
+  "few_shot_examples": [
+    "0001193125-25-312904",
+    "0001140361-24-045855",
+    "0001477932-21-004665",
+    "0001437749-23-002043",
+    "0001362468-24-000065",
+    "0001213900-25-066121",
+    "0001493152-22-019958",
+    "0001213900-24-114023",
+    "0001437749-25-019418",
+    "0001486957-24-000006",
+    "0000936468-23-000017",
+    "0000950170-24-007783",
+    "0001193125-24-208109",
+    "0001788230-25-000124",
+    "0001193125-22-288988"
+  ],
+  "run_date": "2026-11-24",
+  "by_split": {
+    "test": {
+      "n": 1220,
+      "failures": 0,
+      "failure_examples": [],
+      "empty_label_lists": 2,
+      "tokens": {
+        "input": 1676475,
+        "output": 20289,
+        "cache_read": 5295420,
+        "cache_write": 0
+      },
+      "avg_output_tokens": 16.6,
+      "latency_p50_s": 0.808,
+      "latency_p95_s": 1.492,
+      "cost_usd": 0.2307,
+      "cost_per_1k_filings_usd": 0.189,
+      "prices_per_1m": {
+        "input": 0.1,
+        "output": 0.5,
+        "cache_read": 0.01,
+        "as_of": "2026-11-24"
+      }
+    },
+    "val": {
+      "n": 200,
+      "failures": 0,
+      "failure_examples": [],
+      "empty_label_lists": 0,
+      "tokens": {
+        "input": 227944,
+        "output": 3228,
+        "cache_read": 871620,
+        "cache_write": 0
+      },
+      "avg_output_tokens": 16.1,
+      "latency_p50_s": 0.7685,
+      "latency_p95_s": 1.124,
+      "cost_usd": 0.0331,
+      "cost_per_1k_filings_usd": 0.166,
+      "prices_per_1m": {
+        "input": 0.1,
+        "output": 0.5,
+        "cache_read": 0.01,
+        "as_of": "2026-11-24"
+      }
+    }
+  }
+}

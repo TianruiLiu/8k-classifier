@@ -34,6 +34,29 @@
         "cache_read": 0.1,
         "as_of": "2026-11-24"
       }
+    },
+    "val": {
+      "n": 200,
+      "failures": 0,
+      "failure_examples": [],
+      "empty_label_lists": 0,
+      "tokens": {
+        "input": 397964,
+        "output": 3144,
+        "cache_read": 0,
+        "cache_write": 0
+      },
+      "avg_output_tokens": 15.7,
+      "latency_p50_s": 1.124,
+      "latency_p95_s": 1.422,
+      "cost_usd": 0.8274,
+      "cost_per_1k_filings_usd": 4.137,
+      "prices_per_1m": {
+        "input": 2.0,
+        "output": 10.0,
+        "cache_read": 0.1,
+        "as_of": "2026-11-24"
+      }
     }
   }
 }
