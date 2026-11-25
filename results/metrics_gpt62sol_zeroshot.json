@@ -1,0 +1,39 @@
+{
+  "model": "gpt62sol_zeroshot",
+  "provider": "openai",
+  "model_id": "gpt-6.2-sol",
+  "mode": "zeroshot",
+  "prompt_hash": "cee2208a735c",
+  "threshold": 0.5,
+  "settings": {
+    "reasoning_effort": "low",
+    "max_completion_tokens": 1024
+  },
+  "few_shot_examples": [],
+  "run_date": "2026-11-24",
+  "by_split": {
+    "test": {
+      "n": 1220,
+      "failures": 0,
+      "failure_examples": [],
+      "empty_label_lists": 0,
+      "tokens": {
+        "input": 2692135,
+        "output": 19690,
+        "cache_read": 0,
+        "cache_write": 0
+      },
+      "avg_output_tokens": 16.1,
+      "latency_p50_s": 1.131,
+      "latency_p95_s": 1.593,
+      "cost_usd": 5.5812,
+      "cost_per_1k_filings_usd": 4.575,
+      "prices_per_1m": {
+        "input": 2.0,
+        "output": 10.0,
+        "cache_read": 0.1,
+        "as_of": "2026-11-24"
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "model": "gpt6luna_zeroshot",
+  "provider": "openai",
+  "model_id": "gpt-6-luna",
+  "mode": "zeroshot",
+  "prompt_hash": "d31b33c46165",
+  "threshold": 0.5,
+  "settings": {
+    "reasoning_effort": "none",
+    "max_completion_tokens": 1024
+  },
+  "few_shot_examples": [],
+  "run_date": "2026-11-24",
+  "by_split": {
+    "test": {
+      "n": 1220,
+      "failures": 0,
+      "failure_examples": [],
+      "empty_label_lists": 8,
+      "tokens": {
+        "input": 2692135,
+        "output": 21064,
+        "cache_read": 0,
+        "cache_write": 0
+      },
+      "avg_output_tokens": 17.3,
+      "latency_p50_s": 0.779,
+      "latency_p95_s": 1.208,
+      "cost_usd": 0.2797,
+      "cost_per_1k_filings_usd": 0.229,
+      "prices_per_1m": {
+        "input": 0.1,
+        "output": 0.5,
+        "cache_read": 0.01,
+        "as_of": "2026-11-24"
+      }
+    }
+  }
+}
