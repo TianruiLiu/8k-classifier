@@ -119,6 +119,8 @@ def main() -> None:
     p.add_argument("--name", default="modernbert")
     p.add_argument("--max-len", type=int, default=512)
     p.add_argument("--batch-size", type=int, default=8)
+    p.add_argument("--grad-accum", type=int, default=1,
+                   help="micro-batches per optimizer step; effective batch = batch-size x grad-accum")
     p.add_argument("--epochs", type=int, default=3)
     p.add_argument("--lr", type=float, default=5e-5)
     p.add_argument("--weight-decay", type=float, default=0.01)
@@ -161,8 +163,8 @@ def main() -> None:
         {"params": [p_ for n, p_ in model.named_parameters() if any(k in n.lower() for k in no_decay)], "weight_decay": 0.0},
     ]
     opt = torch.optim.AdamW(groups, lr=args.lr)
-    steps_per_epoch = math.ceil(len(ids["train"]) / args.batch_size)
-    total = steps_per_epoch * args.epochs
+    steps_per_epoch = math.ceil(len(ids["train"]) / args.batch_size)        # micro-batches
+    total = math.ceil(steps_per_epoch / args.grad_accum) * args.epochs        # optimizer steps
     sched = get_linear_schedule_with_warmup(opt, int(args.warmup * total), total)
     loss_fn = torch.nn.BCEWithLogitsLoss()
 
@@ -176,9 +178,10 @@ def main() -> None:
         for step, (_, x, m, y) in enumerate(batches(ids["train"], Y["train"], args.batch_size, tok.pad_token_id, True, rng), 1):
             logits = model(input_ids=x.to(device), attention_mask=m.to(device)).logits
             loss = loss_fn(logits.float(), y.to(device))
-            loss.backward()
-            torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
-            opt.step(); sched.step(); opt.zero_grad(set_to_none=True)
+            (loss / args.grad_accum).backward()
+            if step % args.grad_accum == 0 or step == steps_per_epoch:
+                torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+                opt.step(); sched.step(); opt.zero_grad(set_to_none=True)
             running += loss.item()
             if step % 100 == 0 or step == steps_per_epoch:
                 el = time.perf_counter() - t_ep
