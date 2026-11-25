@@ -1,0 +1,65 @@
+{
+  "model": "sonnet55_zeroshot",
+  "provider": "anthropic",
+  "model_id": "claude-sonnet-5-5",
+  "mode": "zeroshot",
+  "prompt_hash": "d31ca1d9b30e",
+  "threshold": 0.5,
+  "settings": {
+    "thinking": {
+      "type": "between_tools"
+    },
+    "output_config": {},
+    "max_tokens": 1024
+  },
+  "few_shot_examples": [],
+  "run_date": "2026-11-24",
+  "by_split": {
+    "test": {
+      "n": 1220,
+      "failures": 0,
+      "failure_examples": [],
+      "empty_label_lists": 0,
+      "tokens": {
+        "input": 2679578,
+        "output": 18820,
+        "cache_read": 1941624,
+        "cache_write": 12816
+      },
+      "avg_output_tokens": 15.4,
+      "latency_p50_s": 1.267,
+      "latency_p95_s": 1.937,
+      "cost_usd": 5.7736,
+      "cost_per_1k_filings_usd": 4.732,
+      "prices_per_1m": {
+        "input": 2.0,
+        "output": 10.0,
+        "cache_read": 0.1,
+        "as_of": "2026-11-24"
+      }
+    },
+    "val": {
+      "n": 200,
+      "failures": 0,
+      "failure_examples": [],
+      "empty_label_lists": 0,
+      "tokens": {
+        "input": 367320,
+        "output": 3012,
+        "cache_read": 307584,
+        "cache_write": 12816
+      },
+      "avg_output_tokens": 15.1,
+      "latency_p50_s": 0.7905,
+      "latency_p95_s": 1.725,
+      "cost_usd": 0.8276,
+      "cost_per_1k_filings_usd": 4.138,
+      "prices_per_1m": {
+        "input": 2.0,
+        "output": 10.0,
+        "cache_read": 0.1,
+        "as_of": "2026-11-24"
+      }
+    }
+  }
+}

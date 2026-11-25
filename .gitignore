@@ -10,3 +10,6 @@ data/download.log
 
 # Built by src/build.py (15 MB); rebuild instead of committing
 data/dataset.parquet
+
+# Raw LLM responses (re-creatable, and large once test runs finish)
+data/llm_cache/

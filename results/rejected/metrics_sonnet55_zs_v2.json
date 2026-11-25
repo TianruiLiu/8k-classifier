@@ -1,0 +1,42 @@
+{
+  "model": "sonnet55_zs_v2",
+  "provider": "anthropic",
+  "model_id": "claude-sonnet-5-5",
+  "mode": "zeroshot",
+  "prompt_hash": "d5b26c75bed5",
+  "threshold": 0.5,
+  "settings": {
+    "thinking": {
+      "type": "between_tools"
+    },
+    "output_config": {},
+    "max_tokens": 1024
+  },
+  "few_shot_examples": [],
+  "run_date": "2026-11-24",
+  "by_split": {
+    "val": {
+      "n": 200,
+      "failures": 0,
+      "failure_examples": [],
+      "empty_label_lists": 0,
+      "tokens": {
+        "input": 367320,
+        "output": 3006,
+        "cache_read": 336384,
+        "cache_write": 14016
+      },
+      "avg_output_tokens": 15.0,
+      "latency_p50_s": 1.253,
+      "latency_p95_s": 1.657,
+      "cost_usd": 0.8334,
+      "cost_per_1k_filings_usd": 4.167,
+      "prices_per_1m": {
+        "input": 2.0,
+        "output": 10.0,
+        "cache_read": 0.1,
+        "as_of": "2026-11-24"
+      }
+    }
+  }
+}

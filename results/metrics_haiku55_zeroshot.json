@@ -1,0 +1,42 @@
+{
+  "model": "haiku55_zeroshot",
+  "provider": "anthropic",
+  "model_id": "claude-haiku-5-5",
+  "mode": "zeroshot",
+  "prompt_hash": "5b0067bb039f",
+  "threshold": 0.5,
+  "settings": {
+    "thinking": {
+      "type": "disabled"
+    },
+    "output_config": {},
+    "max_tokens": 1024
+  },
+  "few_shot_examples": [],
+  "run_date": "2026-11-24",
+  "by_split": {
+    "test": {
+      "n": 1220,
+      "failures": 0,
+      "failure_examples": [],
+      "empty_label_lists": 0,
+      "tokens": {
+        "input": 2679578,
+        "output": 20762,
+        "cache_read": 1941624,
+        "cache_write": 12816
+      },
+      "avg_output_tokens": 17.0,
+      "latency_p50_s": 0.9,
+      "latency_p95_s": 1.536,
+      "cost_usd": 0.2994,
+      "cost_per_1k_filings_usd": 0.245,
+      "prices_per_1m": {
+        "input": 0.1,
+        "output": 0.5,
+        "cache_read": 0.01,
+        "as_of": "2026-11-24"
+      }
+    }
+  }
+}
