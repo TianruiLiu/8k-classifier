@@ -1,0 +1,91 @@
+{
+  "model": "modernbert_e5",
+  "base_model": "answerdotai/ModernBERT-base",
+  "git_commit": "2481fdc",
+  "device": "mps",
+  "threshold": 0.3,
+  "threshold_rule": "global, max val micro-F1 over 0.20-0.80 step 0.05",
+  "val_threshold_sweep": {
+    "0.2": 0.8931928225576758,
+    "0.25": 0.8953854972771568,
+    "0.3": 0.8967109059434507,
+    "0.35": 0.8960511033681765,
+    "0.4": 0.8962703962703963,
+    "0.45": 0.8957845433255269,
+    "0.5": 0.8941798941798942,
+    "0.55": 0.8928255093002657,
+    "0.6": 0.8923806700266825,
+    "0.65": 0.8900804289544236,
+    "0.7": 0.8884892086330936,
+    "0.75": 0.8852063874661042,
+    "0.8": 0.8826205641492265
+  },
+  "best_epoch": 5,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.1481722541266004,
+      "val_micro_f1": 0.8312781954887218,
+      "val_macro_f1": 0.6516347947496803,
+      "val_threshold": 0.45,
+      "epoch_minutes": 21.928839395833588
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.06683203391264797,
+      "val_micro_f1": 0.8604850213980029,
+      "val_macro_f1": 0.7602959966821768,
+      "val_threshold": 0.3,
+      "epoch_minutes": 23.014017486816737
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.036093748634873385,
+      "val_micro_f1": 0.8816061411278417,
+      "val_macro_f1": 0.7777216379930515,
+      "val_threshold": 0.5,
+      "epoch_minutes": 27.075483135416288
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.016113891029408987,
+      "val_micro_f1": 0.8935801041064199,
+      "val_macro_f1": 0.7990611833971787,
+      "val_threshold": 0.35,
+      "epoch_minutes": 24.77987669306652
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.005524174564884612,
+      "val_micro_f1": 0.8967109059434507,
+      "val_macro_f1": 0.8221111053520673,
+      "val_threshold": 0.3,
+      "epoch_minutes": 24.362945645833193
+    }
+  ],
+  "config": {
+    "name": "modernbert_e5",
+    "max_len": 512,
+    "batch_size": 8,
+    "epochs": 5,
+    "lr": 5e-05,
+    "weight_decay": 0.01,
+    "warmup": 0.1,
+    "seed": 42
+  },
+  "smoke": false,
+  "input": "text from the first [ITEM] marker, truncated to max_len tokens",
+  "share_truncated": {
+    "train": 0.4227456494990332,
+    "val": 0.4306808859721083,
+    "test": 0.4885245901639344
+  },
+  "n": {
+    "train": 5689,
+    "val": 1219,
+    "test": 1220
+  },
+  "train_minutes": 121.2,
+  "test_inference_ms_per_doc": 50.9,
+  "torch": "2.15.0"
+}
