@@ -1,0 +1,75 @@
+{
+  "model": "modernbert",
+  "base_model": "answerdotai/ModernBERT-base",
+  "git_commit": "123eac2",
+  "device": "mps",
+  "threshold": 0.4,
+  "threshold_rule": "global, max val micro-F1 over 0.20-0.80 step 0.05",
+  "val_threshold_sweep": {
+    "0.2": 0.8759604829857299,
+    "0.25": 0.8804680969629424,
+    "0.3": 0.8876309085762808,
+    "0.35": 0.8887617958249928,
+    "0.4": 0.8898525585429314,
+    "0.45": 0.8886297376093294,
+    "0.5": 0.8890193775689958,
+    "0.55": 0.8861885002963841,
+    "0.6": 0.8854415274463007,
+    "0.65": 0.8796630565583634,
+    "0.7": 0.8791275371099667,
+    "0.75": 0.8766788766788767,
+    "0.8": 0.8746928746928747
+  },
+  "best_epoch": 3,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.13581782138584805,
+      "val_micro_f1": 0.8239296852849447,
+      "val_macro_f1": 0.672058923349139,
+      "val_threshold": 0.3,
+      "epoch_minutes": 21.88041230903376
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.06028016972217547,
+      "val_micro_f1": 0.8739544274588982,
+      "val_macro_f1": 0.7773766536255576,
+      "val_threshold": 0.35,
+      "epoch_minutes": 24.85726546041648
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.026864369176988742,
+      "val_micro_f1": 0.8898525585429314,
+      "val_macro_f1": 0.7986158198300745,
+      "val_threshold": 0.4,
+      "epoch_minutes": 24.921499451383717
+    }
+  ],
+  "config": {
+    "name": "modernbert",
+    "max_len": 512,
+    "batch_size": 8,
+    "epochs": 3,
+    "lr": 5e-05,
+    "weight_decay": 0.01,
+    "warmup": 0.1,
+    "seed": 42
+  },
+  "smoke": false,
+  "input": "text from the first [ITEM] marker, truncated to max_len tokens",
+  "share_truncated": {
+    "train": 0.4227456494990332,
+    "val": 0.4306808859721083,
+    "test": 0.4885245901639344
+  },
+  "n": {
+    "train": 5689,
+    "val": 1219,
+    "test": 1220
+  },
+  "train_minutes": 71.7,
+  "test_inference_ms_per_doc": 53.9,
+  "torch": "2.15.0"
+}

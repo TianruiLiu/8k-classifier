@@ -16,3 +16,4 @@ data/llm_cache/
 
 # Fine-tuned checkpoints (~600 MB each; rebuilt by src/finetune.py)
 models/
+logs/
