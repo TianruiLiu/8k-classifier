@@ -104,3 +104,15 @@ Subset accuracy if you could pick the right one each time (oracle): 95.9%, vs 91
   > The information required by [ITEM] contained in [ITEM] below is incorporated by reference herein. [ITEM] On August 5, 2026, Athene Holding Ltd. (the “Company”) entered into an Underwriting Agreement (the “Underwriting Agreement”) by and among the Company and Wells Fargo Securities, LLC, Barclays Cap
 
 True labels among the every-model-wrong filings: 8.01 30, 7.01 11, 5.02 10, 1.01 5, 3.02 5, other 3, 2.03 3, 5.07 2, 2.01 1, 5.03 1, 2.02 1, 4.01 1.
+
+## 5. Hybrid: fine-tuned model on short filings, LLM on the rest
+
+Filings of at most N ModernBERT tokens go to modernbert_1024; longer ones to gpt62sol_zeroshot. N chosen on val by subset accuracy.
+
+| Split | Filings | Routed to fine-tune | Hybrid micro / macro | Hybrid subset | gpt62sol_zeroshot micro / macro | gpt62sol_zeroshot subset |
+|---|---|---|---|---|---|---|
+| val, cut 512 (chosen) | 200 | 64% | 0.958 / 0.879 | 0.925 | 0.941 / 0.915 | 0.905 |
+| val, cut 1024 | 200 | 86% | 0.954 / 0.867 | 0.910 | 0.941 / 0.915 | 0.905 |
+| **test, cut 512** | 1220 | 51% | 0.957 / 0.953 | 0.925 | 0.949 / 0.951 | 0.919 |
+
+API cost on test: $2.76 per 1K filings, vs $4.58 sending every filing to gpt62sol_zeroshot (40% less; long filings cost more tokens, so the saving is below the routed share).

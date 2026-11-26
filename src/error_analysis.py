@@ -8,6 +8,7 @@ Sections in results/error_analysis.md:
   3. Accuracy by filing length in ModernBERT tokens (shows what truncation costs).
   4. Where models disagree: ModernBERT vs the best LLM, and filings every model gets wrong
      (candidates for label noise / filer judgment calls; listed with EDGAR links to check by hand).
+  5. Hybrid: fine-tuned model on short filings, LLM on long ones (cutoff chosen on val), with API cost.
 """
 from __future__ import annotations
 
@@ -36,6 +37,50 @@ def edgar_url(acc: str, cik: int) -> str:
 
 def table(header: list[str], rows: list[list]) -> list[str]:
     return ["| " + " | ".join(header) + " |", "|" + "---|" * len(header)] + ["| " + " | ".join(map(str, r)) + " |" for r in rows]
+
+
+def hybrid_section(labels: list[str], data: pd.DataFrame, tok, cuts=(512, 1024)) -> list[str]:
+    """Route filings of at most `cut` tokens to the fine-tuned model and the rest to the best LLM.
+    The cut is chosen on val (the 200 filings the LLM scored there), then test is scored once."""
+    from sklearn.metrics import f1_score
+    llm_meta = json.loads((RESULTS / f"metrics_{BEST_LLM}.json").read_text())
+    price = llm_meta["by_split"]["test"]["prices_per_1m"]
+    cache = DATA / "llm_cache" / BEST_LLM / llm_meta["prompt_hash"]
+    text = data.set_index("accession")["text"]
+
+    def evaluate(split: str, cut: int) -> dict:
+        b = load_model(BEST_LLM, labels, split)
+        a = load_model(FINETUNED, labels, split)
+        a = a[a["accession"].isin(b["accession"])].reset_index(drop=True)
+        assert (a["accession"].values == b["accession"].values).all()
+        Yt, Pa = matrices(a, labels)
+        _, Pb = matrices(b, labels)
+        bodies = [t[t.find("[ITEM]"):] if "[ITEM]" in t else t for t in text.loc[a["accession"]]]
+        short = np.array([len(x) for x in tok(bodies)["input_ids"]]) <= cut
+        P = np.where(short[:, None], Pa, Pb)
+        cost = 0.0
+        for acc_, s in zip(a["accession"], short):
+            if not s:
+                u = json.loads((cache / f"{acc_}.json").read_text())["usage"]
+                cost += (u["input"] * price["input"] + u["output"] * price["output"] + u["cache_read"] * price["cache_read"]) / 1e6
+        return {"n": len(a), "short": short.mean(), "micro": f1_score(Yt, P, average="micro"),
+                "macro": f1_score(Yt, P, average="macro", zero_division=0), "subset": (P == Yt).all(1).mean(),
+                "llm_micro": f1_score(Yt, Pb, average="micro"), "llm_macro": f1_score(Yt, Pb, average="macro", zero_division=0),
+                "llm_subset": (Pb == Yt).all(1).mean(), "cost_per_1k": cost / len(a) * 1000}
+
+    val = {c: evaluate("val", c) for c in cuts}
+    best = max(cuts, key=lambda c: val[c]["subset"])
+    t = evaluate("test", best)
+    rows = [[f"val, cut {c}" + (" (chosen)" if c == best else ""), v["n"], f"{v['short']:.0%}", f"{v['micro']:.3f} / {v['macro']:.3f}",
+             f"{v['subset']:.3f}", f"{v['llm_micro']:.3f} / {v['llm_macro']:.3f}", f"{v['llm_subset']:.3f}"] for c, v in val.items()]
+    rows.append([f"**test, cut {best}**", t["n"], f"{t['short']:.0%}", f"{t['micro']:.3f} / {t['macro']:.3f}", f"{t['subset']:.3f}",
+                 f"{t['llm_micro']:.3f} / {t['llm_macro']:.3f}", f"{t['llm_subset']:.3f}"])
+    full = llm_meta["by_split"]["test"]["cost_per_1k_filings_usd"]
+    return ["## 5. Hybrid: fine-tuned model on short filings, LLM on the rest", "",
+            f"Filings of at most N ModernBERT tokens go to {FINETUNED}; longer ones to {BEST_LLM}. N chosen on val by subset accuracy.", "",
+            *table(["Split", "Filings", "Routed to fine-tune", "Hybrid micro / macro", "Hybrid subset", f"{BEST_LLM} micro / macro", f"{BEST_LLM} subset"], rows),
+            "", f"API cost on test: ${t['cost_per_1k']:.2f} per 1K filings, vs ${full:.2f} sending every filing to {BEST_LLM} "
+            f"({1 - t['cost_per_1k'] / full:.0%} less; long filings cost more tokens, so the saving is below the routed share)."]
 
 
 def main() -> None:
@@ -142,6 +187,7 @@ def main() -> None:
     out += ["", "True labels among the every-model-wrong filings: " +
             ", ".join(f"{l} {c}" for l, c in labels_all_wrong.most_common()) + "."]
 
+    out += ["", *hybrid_section(labels, data, tok)]
     (RESULTS / "error_analysis.md").write_text("\n".join(out) + "\n")
     print("\n".join(out[:80]))
     print(f"\n... wrote results/error_analysis.md")
