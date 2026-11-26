@@ -282,7 +282,9 @@ After masking, 0 filings contain an Item code.
 
 ```bash
 export SEC_USER_AGENT="Your Name your@email.com"   # SEC requires a contact
-uv run python src/scrape.py index        # ~2 min
+# data/index.csv (committed) lists the exact 8,136 filings used. Skip the next line to reuse it;
+# rerunning it samples companies from today's EDGAR and overwrites the list.
+# uv run python src/scrape.py index      # ~2 min
 uv run python src/scrape.py download     # ~30 min at ~5 requests/sec
 uv run python src/build.py               # ~10 s
 uv run python src/baseline.py            # ~10 s
